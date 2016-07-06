@@ -6,12 +6,14 @@
 package helpchords;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -34,10 +36,24 @@ public class HelpChords extends Application {
         });
         
         Label lCntStr = new Label("Количество струн");
+        ObservableList<String> options = 
+    FXCollections.observableArrayList(
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11"
+    );
         
+final ComboBox stringsCountBox = new ComboBox(options);
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         root.getChildren().add(lCntStr);
+         root.getChildren().add(stringsCountBox);
         Scene scene = new Scene(root, 640,480);
         
         primaryStage.setTitle("Hello World!");
