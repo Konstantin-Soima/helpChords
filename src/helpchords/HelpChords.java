@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,40 +23,44 @@ import javafx.stage.Stage;
  * @author konstantin.soyma
  */
 public class HelpChords extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        /*Button btn = new Button();
+         btn.setText("Say 'Hello World'");
+         btn.setOnAction(new EventHandler<ActionEvent>() {
             
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
+         @Override
+         public void handle(ActionEvent event) {
+         System.out.println("Hello World!");
+         }
+         });
+         */
         Label lCntStr = new Label("Количество струн");
-        ObservableList<String> options = 
-    FXCollections.observableArrayList(
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11"
-    );
+        lCntStr.setLayoutX(10);
+        final ComboBox cbStringsCount = new ComboBox(FXCollections.observableArrayList(
+                "3", "4", "5", "6", "7", "8", "9", "10", "11"
+        ));
+        cbStringsCount.setLayoutX(150);
+
+        Label lChrd = new Label("Аккорд");
+        lChrd.setLayoutX(220);
+        final ComboBox cbChordName = new ComboBox(FXCollections.observableArrayList(
+                "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"
+        ));
+        cbChordName.setLayoutX(280);
         
-final ComboBox stringsCountBox = new ComboBox(options);
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        root.getChildren().add(lCntStr);
-         root.getChildren().add(stringsCountBox);
-        Scene scene = new Scene(root, 640,480);
+        Label lSuff = new Label("Суффикс");
+        lSuff.setLayoutX(350);
+        final ComboBox cbChordSuffix = new ComboBox(FXCollections.observableArrayList(
+                "", "5", "sus4", "sus2", "add9", "6", "6/9", "maj7", "maj9", "maj7#11", "maj13", "m", "m(add9)", "m6", "mb6", "m6/9", "m7", "m7b5", "m9", "m11", "m13", "7", "7sus4", "9", "9sus4", "11", "13", "13sus4", "*"
+        ));
+        cbChordSuffix.setLayoutX(420);
         
+        Group root = new Group();
+        root.getChildren().addAll(lCntStr, cbStringsCount, lChrd, cbChordName, lSuff, cbChordSuffix);
+        Scene scene = new Scene(root, 640, 480);
+
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -67,5 +72,5 @@ final ComboBox stringsCountBox = new ComboBox(options);
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
