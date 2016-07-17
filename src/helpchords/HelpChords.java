@@ -49,7 +49,7 @@ public class HelpChords extends Application {
                 "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"
         ));
         cbChordName.setLayoutX(280);
-        
+
         Label lSuff = new Label("Суффикс");
         lSuff.setLayoutX(350);
         final ComboBox cbChordSuffix = new ComboBox(FXCollections.observableArrayList(
@@ -57,13 +57,36 @@ public class HelpChords extends Application {
         ));
         cbChordSuffix.setLayoutX(420);
         
+        Button bMake = new Button("Построить");
+        
         Group root = new Group();
         root.getChildren().addAll(lCntStr, cbStringsCount, lChrd, cbChordName, lSuff, cbChordSuffix);
         Scene scene = new Scene(root, 640, 480);
-
+        
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    String[] tones = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+
+    public String GetTonePlus(String tone, int plus) {
+        int intTone=0;
+        for (int i = 0; i < tones.length; i++) {
+            if (tones[i] == tone) {
+                intTone = i;
+            }
+        }
+        int newTone = (intTone+plus)%tones.length;
+        return tones[newTone];
+    }
+
+    public String[] NotesFromChord(String note, String sufix) { //Ноты в аккорде
+        switch (sufix) {
+            case (""):
+                return new String[]{note,GetTonePlus(note,4),GetTonePlus(note,7)};
+                
+        }
+        return new String []{"Error"};
     }
 
     /**
